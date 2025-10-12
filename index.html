@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍦</text></svg>">
+    <title>Sweet Scoops - Delight in Every Scoop! 🍦</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Define a new color palette using CSS variables for easier changes */
+        :root {
+            --primary-pink-light: #FFC0CB; /* Lighter, soft pink (e.g., for backgrounds) */
+            --primary-pink-medium: #FF69B4; /* Medium, vibrant pink (e.g., for accents, buttons) */
+            --primary-pink-dark: #C71585;  /* Darker pink (e.g., for subtle shadows, hover states) */
+            --gradient-start: #FFDDE1;    /* Very light pink for gradients */
+            --gradient-end: #FFBBCC;      /* Slightly darker light pink for gradients */
+            --text-dark: #333;
+            --text-light: #555;
+            --bg-body: #FFFBFD;            /* A very subtle off-white/pink for body background */
+        }
+
+        /* General Styles */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            background: var(--bg-body); 
+            color: var(--text-dark); 
+            line-height: 1.6; 
+            min-height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+        }
+        html { scroll-behavior: smooth; }
+        footer { margin-top: auto; }
+
+        /* Header & Navigation */
+        header { 
+            background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end)); 
+            padding: 1rem 2rem; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+            box-shadow: 0 2px 15px rgba(var(--primary-pink-light), 0.4); 
+        }
+        header h1 { 
+            font-family: 'Pacifico', cursive; 
+            color: var(--primary-pink-dark); /* Changed to a darker pink for contrast */
+            font-size: 2.2rem; 
+            letter-spacing: 1px;
+        }
+        nav ul { list-style: none; display: flex; gap: 1.5rem; }
+        nav a { 
+            text-decoration: none; 
+            color: var(--primary-pink-dark); /* Changed nav links to darker pink */
+            font-weight: 600; 
+            padding: 0.4rem 0.8rem; 
+            border-radius: 20px; 
+            transition: 0.3s; 
+        }
+        nav a:hover, nav a.active { 
+            background: rgba(var(--primary-pink-dark),0.15); /* Softer hover background */
+            color: var(--primary-pink-medium); /* Lighter on hover */
+        }
+
+        /* Hero Section */
+        .hero { 
+            background: url('https://source.unsplash.com/1600x700/?ice-cream,shop') no-repeat center/cover; 
+            text-align: center; 
+            padding: 8rem 2rem; 
+            position: relative; 
+            color: #fff;
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .hero::after { 
+            content: ""; 
+            position: absolute; 
+            top: 0; left: 0; 
+            width: 100%; height: 100%; 
+            background: rgba(0,0,0,0.5); 
+            backdrop-filter: blur(1px);
+        }
+        .hero-content { 
+            position: relative; z-index: 1; 
+            text-shadow: 0 3px 6px rgba(0,0,0,0.5);
+        }
+        .hero h2 { 
+            font-size: 4rem; 
+            margin-bottom: 0.5rem; 
+            font-family: 'Pacifico', cursive; 
+        }
+        .hero p { 
+            font-size: 1.5rem; 
+            margin-bottom: 2rem; 
+            font-weight: 300;
+        }
+        .hero button { 
+            padding: 1rem 2rem; 
+            border: none; 
+            border-radius: 30px; 
+            background: #fff; 
+            color: var(--primary-pink-medium); 
+            font-size: 1.1rem; 
+            cursor: pointer; 
+            font-weight: 700; 
+            transition: all 0.3s ease; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        .hero button:hover { 
+            transform: translateY(-3px); 
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            background: var(--primary-pink-light); /* Lighter pink on hover */
+            color: #fff; /* White text on hover for contrast */
+        }
+
+        /* Container & Titles */
+        .container { 
+            width: 90%; 
+            max-width: 1200px; 
+            margin: auto; 
+            padding: 4rem 0; 
+        }
+        h2.section-title { 
+            text-align: center; 
+            font-size: 2.5rem; 
+            margin-bottom: 3rem; 
+            font-family: 'Pacifico', cursive; 
+            color: var(--primary-pink-medium); /* Main accent pink */
+            position: relative;
+        }
+        h2.section-title::after {
+            content: '🍦';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.5rem;
+        }
+        
+        /* Specials Section */
+        #specials {
+            background: var(--primary-pink-light); /* Soft light pink background */
+            padding: 2rem 0;
+            margin-bottom: 3rem;
+        }
+        .special-grid {
+            display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            padding: 1rem 5%;
+            scroll-snap-type: x mandatory;
+        }
+        .special-grid::-webkit-scrollbar {
+            height: 8px;
+        }
+        .special-grid::-webkit-scrollbar-thumb {
+            background: var(--primary-pink-medium); /* Scrollbar thumb matching new pink */
+            border-radius: 10px;
+        }
+        .special-card {
+            min-width: 300px;
+            scroll-snap-align: start;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s;
+            /* Added Flex to stack content and button neatly */
+            display: flex; 
+            flex-direction: column;
+        }
+        .special-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        .special-card-content {
+            padding: 1rem;
+            flex-grow: 1; /* Allows content to take up remaining space */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        /* NEW CSS for the Add to Cart button in Specials */
+        .special-card button {
+            padding: 0.6rem 1rem;
+            border: none;
+            border-radius: 20px;
+            background: var(--primary-pink-medium); /* Use the accent pink */
+            color: #fff;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s;
+            width: 100%; /* Make it full width for better touch targets */
+            margin-top: 10px; /* Space it from the price/description */
+            font-size: 0.95rem;
+        }
+        .special-card button:hover {
+            background: var(--primary-pink-dark); /* Darker on hover */
+        }
+        /* End NEW CSS */
+        
+        /* Menu Grid Cards */
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 2rem; 
+        }
+        .card { 
+            background: #fff; 
+            border-radius: 20px; 
+            overflow: hidden; 
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1); 
+            transition: transform 0.3s, box-shadow 0.3s; 
+            display: flex;
+            flex-direction: column;
+        }
+        .card img { 
+            width: 100%; 
+            height: 220px; 
+            object-fit: cover; 
+            border-bottom: 4px solid var(--primary-pink-light); /* Lighter pink border */
+        }
+        .card-content {
+            padding: 0.8rem;
+            flex-grow: 1;
+        }
+        .price { 
+            font-weight: 700; 
+            color: var(--primary-pink-medium); 
+            font-size: 1.5rem;
+            display: block;
+            padding: 0.5rem 0.8rem;
+            background: #fff0f5; /* Maintain a very light background */
+            text-align: right;
+            transition: background 0.3s;
+        }
+        .card-actions {
+            padding: 0.8rem;
+            text-align: center;
+        }
+        .card button { 
+            padding: 0.7rem 1.5rem; 
+            border: none; 
+            border-radius: 25px; 
+            background: linear-gradient(45deg, var(--primary-pink-medium), var(--primary-pink-light)); 
+            color: #fff; 
+            cursor: pointer; 
+            font-weight: 600; 
+            transition: all 0.3s;
+            width: 100%;
+        }
+        .card button:hover {
+            background: linear-gradient(45deg, var(--primary-pink-dark), var(--primary-pink-medium)); /* Darker on hover */
+        }
+
+
+        /* Quality/Process Section */
+        .process-grid {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            margin-top: 2rem;
+        }
+        .process-step {
+            width: 30%;
+            padding: 1rem;
+        }
+        .process-step i {
+            font-size: 3rem;
+            color: var(--primary-pink-medium); /* Accent pink */
+            margin-bottom: 0.8rem;
+        }
+
+        /* Testimonials Section */
+        #testimonials {
+            background: var(--primary-pink-light); /* Light pink background */
+            padding: 4rem 0;
+        }
+        .review-card {
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .review-card blockquote {
+            font-style: italic;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+        .review-card .rating {
+            color: gold;
+            margin-bottom: 0.5rem;
+        }
+        .review-card cite {
+            display: block;
+            font-weight: 600;
+            color: var(--primary-pink-medium); /* Accent pink */
+        }
+
+        /* Cart Sidebar */
+        .cart { 
+            position: fixed; 
+            top: 0; 
+            right: -350px; 
+            width: 350px; 
+            height: 100%; 
+            background: #fff; 
+            box-shadow: -5px 0 15px rgba(0,0,0,0.15); 
+            transition: right 0.4s ease-in-out; 
+            padding: 1.5rem; 
+            overflow-y: auto; 
+            z-index: 2000; 
+            border-left: 5px solid var(--primary-pink-medium); /* Accent pink border */
+        }
+        .cart.open { right: 0; }
+        .cart-close {
+            float: right;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-pink-medium); /* Accent pink */
+        }
+        .cart h2 { 
+            font-family: 'Pacifico', cursive; 
+            margin-bottom: 1.5rem; 
+            color: var(--primary-pink-medium); /* Accent pink */
+            font-size: 2rem;
+        }
+        .cart li { 
+            display: grid; 
+            grid-template-columns: 1fr auto auto; 
+            gap: 10px;
+            align-items: center; 
+            padding: 0.8rem 0; 
+            border-bottom: 1px dashed var(--primary-pink-light); /* Lighter pink dashed line */
+        }
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .qty-btn {
+            background: var(--primary-pink-medium); /* Accent pink */
+            color: #fff;
+            border: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: bold;
+            line-height: 1;
+        }
+        .remove-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--primary-pink-medium); /* Accent pink */
+        }
+        .cart-total { 
+            font-weight: 700; 
+            margin-top: 1.5rem; 
+            color: var(--text-dark); 
+            font-size: 1.3rem;
+            padding-top: 1rem;
+            border-top: 2px solid var(--primary-pink-medium); /* Accent pink border */
+        }
+        .checkout { 
+            margin-top: 1.5rem; 
+            padding: 1rem; 
+            width: 100%; 
+            border: none; 
+            border-radius: 30px; 
+            background: linear-gradient(90deg, var(--primary-pink-medium), var(--primary-pink-light)); 
+            color: #fff; 
+            font-size: 1.1rem; 
+            cursor: pointer; 
+            font-weight: 700;
+        }
+        .checkout:hover {
+            background: linear-gradient(90deg, var(--primary-pink-dark), var(--primary-pink-medium)); 
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: #fff;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+        .footer-content {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 2rem;
+            max-width: 1000px;
+            margin: auto;
+        }
+        .footer-col h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--primary-pink-light); /* Lighter pink for footer headings */
+            border-bottom: 2px solid var(--primary-pink-light); 
+            padding-bottom: 5px;
+        }
+        .social-links a {
+            color: #fff;
+            font-size: 1.5rem;
+            margin-right: 15px;
+            transition: color 0.3s;
+        }
+        .social-links a:hover {
+            color: var(--primary-pink-light);
+        }
+        .footer-bottom {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #555;
+            font-size: 0.9rem;
+        }
+        
+        /* Scroll to Top Button */
+        #scrollToTopBtn {
+            display: none; 
+            position: fixed; 
+            bottom: 20px; 
+            right: 20px; 
+            z-index: 999; 
+            border: none; 
+            outline: none; 
+            background-color: var(--primary-pink-medium); 
+            color: white; 
+            cursor: pointer; 
+            padding: 15px; 
+            border-radius: 50%; 
+            font-size: 18px; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: background-color 0.3s;
+        }
+        #scrollToTopBtn:hover {
+            background-color: var(--primary-pink-dark); /* Darker on hover */
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .process-grid { flex-direction: column; }
+            .process-step { width: 90%; margin: 1rem auto; }
+            .hero h2 { font-size: 3rem; }
+            .cart { width: 100%; right: -100%; }
+            .footer-content { justify-content: center; }
+            .footer-col { text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Sweet Scoops 🍨</h1>
+        <nav>
+            <ul>
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#menu" class="nav-link">Menu</a></li>
+                <li><a href="#process" class="nav-link">Quality</a></li>
+                <li><a href="#testimonials" class="nav-link">Reviews</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li><a href="#" onclick="toggleCart()">🛒 Cart (<span id="cart-count">0</span>)</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h2>Delight in Every Scoop!</h2>
+            <p>Fresh, creamy, and made with love – your favorite ice creams await.</p>
+            <button onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})">Explore Flavors</button>
+        </div>
+    </section>
+
+    <section id="specials">
+        <div class="container">
+            <h2 class="section-title">Today's Specials</h2>
+            <div class="special-grid">
+                <div class="special-card" data-name="Cookie Ice Cream Sandwich" data-price="180">
+                    <img src="icecream sandwich.jpg" alt="Ice Cream Sandwich">
+                    <div class="special-card-content">
+                        <div>
+                            <h3>Cookie Ice Cream Sandwich</h3>
+                            <p>Homemade cookies and creamy filling. A classic!</p>
+                        </div>
+                        <p class="price">₹180</p>
+                        <button onclick="addToCart('Cookie Ice Cream Sandwich', 180)">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="special-card" data-name="Dairy-Free Coconut Bliss" data-price="200">
+                    <img src="veganscoop.jpg" alt="Vegan Scoop">
+                    <div class="special-card-content">
+                        <div>
+                            <h3>Dairy-Free Coconut Bliss</h3>
+                            <p>Rich and smooth vegan option using coconut milk.</p>
+                        </div>
+                        <p class="price">₹200</p>
+                        <button onclick="addToCart('Dairy-Free Coconut Bliss', 200)">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="special-card" data-name="Artisan Pistachio" data-price="220">
+                    <img src="Pistachio.jpg" alt="Pistachio">
+                    <div class="special-card-content">
+                        <div>
+                            <h3>Artisan Pistachio</h3>
+                            <p>Roasted Sicilian pistachios for an intense nutty flavor.</p>
+                        </div>
+                        <p class="price">₹220</p>
+                        <button onclick="addToCart('Artisan Pistachio', 220)">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr>
+    
+    <section class="container" id="menu">
+        <h2 class="section-title">Our Flavors</h2>
+        <div class="grid">
+            <div class="card" data-name="Classic Vanilla" data-price="120">
+                <img src="vanilla.jpg" alt="Vanilla">
+                <div class="card-content">
+                    <h3>Classic Vanilla</h3>
+                    <p>Timeless creamy goodness, always a classic favorite.</p>
+                </div>
+                <p class="price">₹120</p>
+                <div class="card-actions">
+                    <button onclick="addToCart('Classic Vanilla', 120)">Add to Cart</button>
+                </div>
+            </div>
+            <div class="card" data-name="Chocolate Fudge" data-price="150">
+                <img src="chocolate fudge.jpg" alt="Chocolate">
+                <div class="card-content">
+                    <h3>Chocolate Fudge</h3>
+                    <p>Rich, dark chocolate indulgence with swirls of fudge.</p>
+                </div>
+                <p class="price">₹150</p>
+                <div class="card-actions">
+                    <button onclick="addToCart('Chocolate Fudge', 150)">Add to Cart</button>
+                </div>
+            </div>
+            <div class="card" data-name="Strawberry Swirl" data-price="140">
+                <img src="Strawberry Swirl.jpg" alt="Strawberry">
+                <div class="card-content">
+                    <h3>Strawberry Swirl</h3>
+                    <p>Fresh, tangy strawberries swirled in sweet cream.</p>
+                </div>
+                <p class="price">₹140</p>
+                <div class="card-actions">
+                    <button onclick="addToCart('Strawberry Swirl', 140)">Add to Cart</button>
+                </div>
+            </div>
+            <div class="card" data-name="Mint Chocolate Chip" data-price="160">
+                <img src="Mint Chocolate Chip.jpg" alt="Mint">
+                <div class="card-content">
+                    <h3>Mint Chocolate Chip</h3>
+                    <p>Cool mint flavor loaded with crisp chocolate chips.</p>
+                </div>
+                <p class="price">₹160</p>
+                <div class="card-actions">
+                    <button onclick="addToCart('Mint Chocolate Chip', 160)">Add to Cart</button>
+                </div>
+            </div>
+            <div class="card" data-name="Rocky Road" data-price="170">
+                <img src="Rocky-Road-Ice-Cream-1-5.jpg" alt="Rocky Road">
+                <div class="card-content">
+                    <h3>Rocky Road</h3>
+                    <p>Chocolate, crunchy almonds, and fluffy marshmallows.</p> 
+                </div>
+                <p class="price">₹170</p>
+                <div class="card-actions">
+                    <button onclick="addToCart('Rocky Road', 170)">Add to Cart</button>
+                </div>
+            </div>
+            <div class="card" data-name="Coffee Lovers" data-price="160">
+                <img src="Coffee Lovers.jpg" alt="Coffee">
+                <div class="card-content">
+                    <h3>Coffee Lovers</h3>
+                    <p>Rich coffee ice cream delight.</p>
+                </div>
+                <p class="price">₹160</p>
+                <div class="card-actions">
+                    <button onclick="addToCart('Coffee Lovers', 160)">Add to Cart</button>
+                </div>
+            </div>
+            <div class="card" data-name="Cookies & Cream" data-price="150">
+                <img src="Cookies & Cream.jpg" alt="Cookies & Cream">
+                <div class="card-content">
+                    <h3>Cookies & Cream</h3>
+                    <p>Crunchy cookies in creamy base.</p>
+                </div>
+                <p class="price">₹150</p>
+                <div class="card-actions">
+                    <button onclick="addToCart('Cookies & Cream', 150)">Add to Cart</button>
+                </div>
+            </div>
+            <div class="card" data-name="Butter Pecan" data-price="170">
+                <img src="Butter Pecan.jpg" alt="Butter Pecan">
+                <div class="card-content">
+                    <h3>Butter Pecan</h3>
+                    <p>Nutty buttery ice cream.</p>
+                </div>
+                <p class="price">₹170</p>
+                <div class="card-actions">
+                    <button onclick="addToCart('Butter Pecan', 170)">Add to Cart</button>
+                </div>
+            </div>
+            <div class="card" data-name="Mango Delight" data-price="140">
+                <img src="Mango Delight.jpg" alt="Mango">
+                <div class="card-content">
+                    <h3>Mango Delight</h3>
+                    <p>Refreshing mango flavor.</p>
+                </div>
+                <p class="price">₹140</p>
+                <div class="card-actions">
+                    <button onclick="addToCart('Mango Delight', 140)">Add to Cart</button>
+                </div>
+            </div>
+            <div class="card" data-name="Rum Raisin" data-price="160">
+                <img src="Rum-Raisin-Ice-Cream-5.2-683x1024.jpg" alt="Rum Raisin">
+                <div class="card-content">
+                    <h3>Rum Raisin</h3>
+                    <p>Classic rum & raisin ice cream.</p>
+                </div>
+                <p class="price">₹160</p>
+                <div class="card-actions">
+                    <button onclick="addToCart('Rum Raisin', 160)">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr>
+    
+    <section class="container" id="process">
+        <h2 class="section-title">Our Quality & Craft</h2>
+        <p style="text-align:center; max-width:800px; margin:auto; margin-bottom: 2rem; color:var(--text-light);">We take pride in our small-batch process, ensuring the highest quality, creamiest texture, and most vibrant flavors possible.</p>
+        
+        <div class="process-grid">
+            <div class="process-step">
+                <i class="fas fa-seedling"></i>
+                <h4>Farm-Fresh Ingredients</h4>
+                <p>We source local, high-quality milk and cream for a truly rich base.</p>
+            </div>
+            <div class="process-step">
+                <i class="fas fa-temperature-low"></i>
+                <h4>Slow Churning</h4>
+                <p>Our slow-churning process minimizes air, giving you that dense, creamy texture.</p>
+            </div>
+            <div class="process-step">
+                <i class="fas fa-heart"></i>
+                <h4>Hand-Crafted Love</h4>
+                <p>Every mix-in, swirl, and topping is added by hand with care.</p>
+            </div>
+        </div>
+    </section>
+
+    <hr>
+
+    <section id="testimonials">
+        <div class="container">
+            <h2 class="section-title" style="color:#fff;">What Our Customers Say</h2>
+            <div class="review-grid">
+                <div class="review-card">
+                    <div class="rating">⭐⭐⭐⭐⭐</div>
+                    <blockquote>"The best chocolate fudge I've ever had! It's rich, dense, and perfectly balanced. The staff is always so friendly."</blockquote>
+                    <cite>- Priya S.</cite>
+                </div>
+                <div class="review-card">
+                    <div class="rating">⭐⭐⭐⭐⭐</div>
+                    <blockquote>"Sweet Scoops is my weekend treat. The Strawberry Swirl tastes like summer in a cone. Highly recommend for families!"</blockquote>
+                    <cite>- Rohan K.</cite>
+                </div>
+                <div class="review-card">
+                    <div class="rating">⭐⭐⭐⭐</div>
+                    <blockquote>"Great variety of flavors, even some unique seasonal ones. The coffee ice cream is strong and incredibly smooth."</blockquote>
+                    <cite>- Jasmine A.</cite>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr>
+
+    <section class="container" id="about">
+        <h2 class="section-title">Our Story</h2>
+        <p style="text-align:center; max-width:700px; margin:auto; color:var(--text-light);">At Sweet Scoops, we believe ice cream is happiness served in a cone! Our mission is to bring joy with every bite, using only the finest ingredients and lots of love. We started this shop in 2023 with a single mixer and a passion for frozen treats, and we've been churning out smiles ever since.</p>
+    </section>
+
+    <hr>
+    
+    <section class="container" id="contact">
+        <h2 class="section-title">Visit & Connect</h2>
+        <p style="text-align:center; margin-bottom: 1rem;">📍 Address: Delhi-NCR, Meerut Rd, Ghaziabad, Uttar Pradesh 201206</p>
+        <p style="text-align:center;">📧 Email: hello@sweetscoops.com | 📞 Phone: +91 9876543210</p>
+    </section>
+
+    <div class="cart" id="cart">
+        <button class="cart-close" onclick="toggleCart()">❌</button>
+        <h2>Your Cart</h2>
+        <ul id="cart-items">
+            <li class="cart-empty" style="text-align: center; color: #999;">Your cart is empty.</li>
+        </ul>
+        <p class="cart-total">Total: ₹<span id="cart-total">0</span></p>
+        <button class="checkout" onclick="checkout()">✅ Proceed to Checkout</button>
+    </div>
+
+    <button onclick="scrollToTop()" id="scrollToTopBtn" title="Go to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4>Sweet Scoops</h4>
+                <p>Delivering happiness, one scoop at a time. Quality ingredients, unforgettable taste.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Follow Us</h4>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Hours</h4>
+                <p>Mon - Fri: 11:00 AM - 10:00 PM</p>
+                <p>Sat - Sun: 10:00 AM - 11:00 PM</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; <span id="current-year"></span> Sweet Scoops. All rights reserved. | Crafted with 💖
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+ let cart = [];
+
+    function addToCart(name, price) {
+      const item = cart.find(i => i.name === name);
+      if(item) {
+        item.qty++;
+      } else {
+        cart.push({ name, price, qty: 1 });
+      }
+      updateCart();
+    }
+
+    function updateCart() {
+      const cartItems = document.getElementById('cart-items');
+      const cartCount = document.getElementById('cart-count');
+      const cartTotal = document.getElementById('cart-total');
+      cartItems.innerHTML = '';
+      let total = 0;
+      let count = 0;
+      cart.forEach(item => {
+        total += item.price * item.qty;
+        count += item.qty;
+        cartItems.innerHTML += `<li>${item.name} x ${item.qty} - ₹${item.price * item.qty} <button onclick=\"removeFromCart('${item.name}')\">🗑️</button></li>`;
+      });
+      cartCount.textContent = count;
+      cartTotal.textContent = total;
+    }
+
+    function removeFromCart(name) {
+      cart = cart.filter(item => item.name !== name);
+      updateCart();
+    }
+
+    function toggleCart() {
+      document.getElementById('cart').classList.toggle('open');
+    }
+
+    function checkout() {
+      if(cart.length === 0) {
+        alert("Your cart is empty!");
+      } else {
+        alert("Thank you for your order! 🍦");
+        cart = [];
+        updateCart();
+        toggleCart();
+      }
+    }
+  
+
+
+        // Scroll-to-Top functionality
+        function scrollToTop() {
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        }
+
+        window.onscroll = function() {scrollFunction()};
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                document.getElementById("scrollToTopBtn").style.display = "block";
+            } else {
+                document.getElementById("scrollToTopBtn").style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
